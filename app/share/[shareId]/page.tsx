@@ -9,19 +9,23 @@ export const dynamic = "force-dynamic";
 async function getSharedCollection(shareId: string) {
   try {
     getGitHubConfig();
-  } catch {
+
+    const collections = (await listEntities("collections")) as unknown as Collection[];
+    const collection = collections.find((c) => c.shareId === shareId && c.shareMode === "link");
+    if (!collection || collection.deletedAt || collection.archived) return null;
+
+    const space = ((await listEntities("spaces")) as unknown as Space[]).find((s) => s.id === collection.spaceId);
+    const resources = ((await listEntities("resources")) as unknown as Resource[]).filter(
+      (r) => r.collectionId === collection.id && !r.deletedAt && !r.archived
+    );
+
+    return { collection, spaceName: space?.name ?? null, resources };
+  } catch (err) {
+    // The data store being unreachable or misconfigured must never crash this public,
+    // unauthenticated page — surface it as "not available" rather than a raw 500.
+    console.error("[share-page-error]", err instanceof Error ? err.stack || err.message : err);
     return null;
   }
-  const collections = (await listEntities("collections")) as unknown as Collection[];
-  const collection = collections.find((c) => c.shareId === shareId && c.shareMode === "link");
-  if (!collection || collection.deletedAt || collection.archived) return null;
-
-  const space = ((await listEntities("spaces")) as unknown as Space[]).find((s) => s.id === collection.spaceId);
-  const resources = ((await listEntities("resources")) as unknown as Resource[]).filter(
-    (r) => r.collectionId === collection.id && !r.deletedAt && !r.archived
-  );
-
-  return { collection, spaceName: space?.name ?? null, resources };
 }
 
 export default async function SharedCollectionPage({ params }: { params: Promise<{ shareId: string }> }) {
