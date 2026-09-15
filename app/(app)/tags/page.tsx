@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { ResourceExplorer } from "@/components/resources/ResourceExplorer";
 import { api, ApiError } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
+import { chipClasses, familyForKey } from "@/lib/client/category-colors";
 
 export default function TagsPage() {
   const { loading, tags, resources, setTags, setResources } = useWorkspace();
@@ -108,8 +109,8 @@ export default function TagsPage() {
           {tags.map((tag) => (
             <div
               key={tag.id}
-              className={`group flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm ${
-                selectedTagId === tag.id ? "border-[var(--accent)] bg-[var(--accent)]/10" : "border-[var(--border)]"
+              className={`group flex items-center gap-1.5 rounded-full px-3 py-1 text-sm ${chipClasses(familyForKey(tag.id))} ${
+                selectedTagId === tag.id ? "ring-2 ring-[var(--accent)]" : ""
               }`}
             >
               {renamingId === tag.id ? (
@@ -123,7 +124,7 @@ export default function TagsPage() {
                 />
               ) : (
                 <button onClick={() => setSelectedTagId(tag.id === selectedTagId ? null : tag.id)}>
-                  {tag.name} <span className="text-[var(--muted)]">({counts.get(tag.id) ?? 0})</span>
+                  {tag.name} <span className="opacity-70">({counts.get(tag.id) ?? 0})</span>
                 </button>
               )}
               <button

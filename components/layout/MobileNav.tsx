@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Plus } from "lucide-react";
 import { NAV_ITEMS } from "./nav-items";
+import { CATEGORY_COLORS } from "@/lib/client/category-colors";
 import { useQuickActions } from "@/lib/client/quick-actions-context";
 
 export function MobileNav() {
@@ -41,12 +42,13 @@ function MobileNavLink({
   item: (typeof NAV_ITEMS)[number];
   active: boolean;
 }) {
+  const colors = CATEGORY_COLORS[item.family];
   return (
     <Link
       href={item.href}
       className={clsx(
         "flex flex-1 flex-col items-center gap-0.5 py-2 text-[11px] font-medium",
-        active ? "text-[var(--accent)]" : "text-[var(--muted)]"
+        active ? colors.icon : "text-[var(--muted)]"
       )}
       aria-current={active ? "page" : undefined}
     >

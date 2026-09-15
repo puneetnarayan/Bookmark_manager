@@ -8,6 +8,7 @@ import type { Space } from "@/types";
 import { useWorkspace } from "@/lib/client/workspace-context";
 import { api } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
+import { getReadableTextColor } from "@/lib/client/color-utils";
 
 interface SpaceCardProps {
   space: Space;
@@ -124,8 +125,8 @@ export function SpaceCard({ space, collectionCount, resourceCount, draggable, on
       <div className="flex items-start justify-between">
         <Link href={`/spaces/${space.id}`} className="flex items-center gap-2">
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold text-white"
-            style={{ backgroundColor: space.color }}
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold"
+            style={{ backgroundColor: space.color, color: getReadableTextColor(space.color) }}
           >
             {space.name.slice(0, 1).toUpperCase()}
           </span>

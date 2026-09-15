@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { NoteEditor } from "@/components/notes/NoteEditor";
 import { useNote } from "@/hooks/useNote";
 import { api, ApiError } from "@/lib/client/api";
+import { getReadableTextColor } from "@/lib/client/color-utils";
 import { useToast } from "@/lib/client/toast-context";
 
 export default function CollectionDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -98,8 +99,8 @@ function CollectionDetailPageInner({ params }: { params: Promise<{ id: string }>
         <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <span
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-base font-semibold text-white"
-              style={{ backgroundColor: collection.color }}
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-base font-semibold"
+              style={{ backgroundColor: collection.color, color: getReadableTextColor(collection.color) }}
             >
               {collection.name.slice(0, 1).toUpperCase()}
             </span>

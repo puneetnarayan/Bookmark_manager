@@ -9,13 +9,14 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { api } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
 import clsx from "clsx";
+import { CATEGORY_COLORS } from "@/lib/client/category-colors";
 
 const STATUS_COLORS: Record<string, string> = {
-  healthy: "text-emerald-600 dark:text-emerald-400",
-  redirected: "text-blue-600 dark:text-blue-400",
-  warning: "text-amber-600 dark:text-amber-400",
-  dead: "text-red-600 dark:text-red-400",
-  unknown: "text-[var(--muted)]",
+  healthy: CATEGORY_COLORS.emerald.chip,
+  redirected: CATEGORY_COLORS.sky.chip,
+  warning: CATEGORY_COLORS.amber.chip,
+  dead: CATEGORY_COLORS.rose.chip,
+  unknown: CATEGORY_COLORS.stone.chip,
 };
 
 const MAX_BATCH = 25;
@@ -107,7 +108,7 @@ export default function LinkCheckPage() {
                 <p className="truncate font-medium">{r.title || r.url}</p>
                 <p className="truncate text-xs text-[var(--muted)]">{collectionsById.get(r.collectionId)} · {r.url}</p>
               </div>
-              <span className={clsx("shrink-0 text-xs font-medium", STATUS_COLORS[r.linkStatus])}>
+              <span className={clsx("shrink-0 rounded-full px-2 py-0.5 text-xs font-medium", STATUS_COLORS[r.linkStatus])}>
                 {r.linkStatus}
                 {r.httpStatus ? ` (${r.httpStatus})` : ""}
               </span>

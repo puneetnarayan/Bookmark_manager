@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { NAV_ITEMS } from "./nav-items";
+import { CATEGORY_COLORS } from "@/lib/client/category-colors";
 import { Boxes } from "lucide-react";
 
 export function Sidebar() {
@@ -18,19 +19,18 @@ export function Sidebar() {
       <nav className="flex-1 space-y-0.5 px-3" aria-label="Main navigation">
         {NAV_ITEMS.map((item) => {
           const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+          const colors = CATEGORY_COLORS[item.family];
           return (
             <Link
               key={item.href}
               href={item.href}
               className={clsx(
                 "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                active
-                  ? "bg-[var(--accent)]/10 text-[var(--accent)]"
-                  : "text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
+                active ? colors.chip : "text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
               )}
               aria-current={active ? "page" : undefined}
             >
-              <item.icon className="h-4 w-4 shrink-0" aria-hidden />
+              <item.icon className={clsx("h-4 w-4 shrink-0", !active && colors.icon)} aria-hidden />
               {item.label}
             </Link>
           );

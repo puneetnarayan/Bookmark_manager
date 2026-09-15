@@ -8,6 +8,7 @@ import type { Collection } from "@/types";
 import { useWorkspace } from "@/lib/client/workspace-context";
 import { api } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
+import { getReadableTextColor } from "@/lib/client/color-utils";
 
 interface CollectionCardProps {
   collection: Collection;
@@ -125,8 +126,8 @@ export function CollectionCard({ collection, resourceCount, draggable, onDragSta
       )}
       <div className="flex items-start justify-between">
         <span
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold text-white"
-          style={{ backgroundColor: collection.color }}
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-semibold"
+          style={{ backgroundColor: collection.color, color: getReadableTextColor(collection.color) }}
         >
           {collection.name.slice(0, 1).toUpperCase()}
         </span>

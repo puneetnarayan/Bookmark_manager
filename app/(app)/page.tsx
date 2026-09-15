@@ -82,16 +82,16 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        <StatCard label="Spaces" value={stats.spaces} icon={FolderKanban} href="/spaces" />
-        <StatCard label="Collections" value={stats.collections} icon={FolderKanban} href="/spaces" />
-        <StatCard label="Resources" value={stats.resources} icon={Library} href="/resources" />
-        <StatCard label="Favorites" value={stats.favorites} icon={Star} href="/favorites" />
-        <StatCard label="Pinned" value={stats.pinned} icon={Pin} href="/resources?pinned=true" />
-        <StatCard label="Next Items" value={stats.nextItems} icon={ListChecks} href="/next" />
-        <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} href="/next?view=overdue" tone="danger" />
-        <StatCard label="Archived" value={stats.archived} icon={Archive} href="/archive" />
-        <StatCard label="Trash" value={stats.trash} icon={Trash2} href="/trash" />
-        <StatCard label="Dead Links" value={stats.deadLinks} icon={Link2Off} href="/resources?linkStatus=dead" tone="warning" />
+        <StatCard label="Spaces" value={stats.spaces} icon={FolderKanban} href="/spaces" family="violet" />
+        <StatCard label="Collections" value={stats.collections} icon={FolderKanban} href="/spaces" family="violet" />
+        <StatCard label="Resources" value={stats.resources} icon={Library} href="/resources" family="sky" />
+        <StatCard label="Favorites" value={stats.favorites} icon={Star} href="/favorites" family="amber" />
+        <StatCard label="Pinned" value={stats.pinned} icon={Pin} href="/resources?pinned=true" family="indigo" />
+        <StatCard label="Next Items" value={stats.nextItems} icon={ListChecks} href="/next" family="teal" />
+        <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} href="/next?view=overdue" family="rose" />
+        <StatCard label="Archived" value={stats.archived} icon={Archive} href="/archive" family="stone" />
+        <StatCard label="Trash" value={stats.trash} icon={Trash2} href="/trash" family="slate" />
+        <StatCard label="Dead Links" value={stats.deadLinks} icon={Link2Off} href="/resources?linkStatus=dead" family="orange" />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

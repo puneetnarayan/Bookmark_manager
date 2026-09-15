@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { api, ApiError } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
 import type { QuickLink } from "@/types";
+import { PASTEL_SWATCHES, getReadableTextColor } from "@/lib/client/color-utils";
 
 export default function QuickLinksPage() {
   const { loading, quickLinks, setQuickLinks } = useWorkspace();
@@ -117,8 +118,8 @@ export default function QuickLinksPage() {
               </div>
               <a href={link.url} target="_blank" rel="noopener noreferrer" className="mt-1 flex flex-col items-center gap-2 pb-1 text-center">
                 <span
-                  className="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold text-white"
-                  style={{ backgroundColor: link.color }}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold"
+                  style={{ backgroundColor: link.color, color: getReadableTextColor(link.color) }}
                 >
                   {link.name.slice(0, 1).toUpperCase()}
                 </span>
@@ -142,7 +143,7 @@ export default function QuickLinksPage() {
   );
 }
 
-const COLORS = ["#6366f1", "#ec4899", "#f59e0b", "#10b981", "#0ea5e9", "#8b5cf6", "#ef4444"];
+const COLORS = PASTEL_SWATCHES;
 
 function QuickLinkModal({
   open,
@@ -214,8 +215,12 @@ function QuickLinkModal({
                 key={c}
                 onClick={() => setColor(c)}
                 aria-label={`Choose color ${c}`}
-                className="h-6 w-6 rounded-full"
-                style={{ backgroundColor: c, outline: color === c ? `2px solid ${c}` : undefined }}
+                className="h-6 w-6 rounded-full ring-offset-2"
+                style={{
+                  backgroundColor: c,
+                  outline: color === c ? "2px solid var(--accent)" : undefined,
+                  outlineOffset: color === c ? "2px" : undefined,
+                }}
               />
             ))}
           </div>

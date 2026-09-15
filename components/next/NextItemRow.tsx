@@ -8,12 +8,14 @@ import { useWorkspace } from "@/lib/client/workspace-context";
 import { api } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
 import { isOverdue } from "@/lib/client/derived";
+import { CATEGORY_COLORS } from "@/lib/client/category-colors";
 
+// A calm-to-urgent pastel ramp, reused nowhere else so priority always reads as its own scale.
 const PRIORITY_COLORS: Record<Priority, string> = {
-  low: "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200",
-  normal: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200",
-  high: "bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-200",
-  urgent: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200",
+  low: CATEGORY_COLORS.emerald.chip,
+  normal: CATEGORY_COLORS.sky.chip,
+  high: CATEGORY_COLORS.amber.chip,
+  urgent: CATEGORY_COLORS.rose.chip,
 };
 
 interface NextItemRowProps {

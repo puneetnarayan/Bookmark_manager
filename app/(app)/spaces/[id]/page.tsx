@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { NoteEditor } from "@/components/notes/NoteEditor";
 import { useNote } from "@/hooks/useNote";
 import { api } from "@/lib/client/api";
+import { getReadableTextColor } from "@/lib/client/color-utils";
 import Link from "next/link";
 
 export default function SpaceDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -79,8 +80,8 @@ export default function SpaceDetailPage({ params }: { params: Promise<{ id: stri
         <div className="mt-2 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <span
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-base font-semibold text-white"
-              style={{ backgroundColor: space.color }}
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-base font-semibold"
+              style={{ backgroundColor: space.color, color: getReadableTextColor(space.color) }}
             >
               {space.name.slice(0, 1).toUpperCase()}
             </span>

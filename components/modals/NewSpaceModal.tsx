@@ -7,9 +7,10 @@ import { useQuickActions } from "@/lib/client/quick-actions-context";
 import { useWorkspace } from "@/lib/client/workspace-context";
 import { api, ApiError } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
+import { PASTEL_SWATCHES } from "@/lib/client/color-utils";
 
 const ICONS = ["folder", "briefcase", "book", "star", "flask-conical", "rocket", "compass"];
-const COLORS = ["#6366f1", "#ec4899", "#f59e0b", "#10b981", "#0ea5e9", "#8b5cf6", "#ef4444"];
+const COLORS = PASTEL_SWATCHES;
 
 export function NewSpaceModal() {
   const { newSpaceOpen, closeNewSpace } = useQuickActions();
@@ -66,7 +67,11 @@ export function NewSpaceModal() {
                 onClick={() => setColor(c)}
                 aria-label={`Choose color ${c}`}
                 className="h-6 w-6 rounded-full ring-offset-2"
-                style={{ backgroundColor: c, outline: color === c ? `2px solid ${c}` : undefined }}
+                style={{
+                  backgroundColor: c,
+                  outline: color === c ? "2px solid var(--accent)" : undefined,
+                  outlineOffset: color === c ? "2px" : undefined,
+                }}
               />
             ))}
           </div>
