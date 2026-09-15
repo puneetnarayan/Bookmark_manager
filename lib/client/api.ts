@@ -183,6 +183,8 @@ export const api = {
       ),
   },
 
+  validate: () => request<{ valid: true; checkedFiles: string[] }>("/api/github/validate"),
+
   backups: {
     list: () =>
       request<{ backups: { path: string; fileName: string; createdAt: string; reason: string }[] }>(

@@ -24,6 +24,18 @@
   --accent: #818cf8;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0b0f19;
+    --surface: #131a2a;
+    --surface-hover: #1c2438;
+    --foreground: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #263149;
+    --accent: #818cf8;
+  }
+}
+
 :root[data-density="compact"] {
   --density-unit: 0.75rem;
 }
