@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { api, ApiError } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
 import type { QuickLink } from "@/types";
-import { PASTEL_SWATCHES, getReadableTextColor } from "@/lib/client/color-utils";
+import { PASTEL_SWATCHES, getReadableTextColor, cardTintStyle, HOVER_DARKEN_CLASS } from "@/lib/client/color-utils";
 
 export default function QuickLinksPage() {
   const { loading, quickLinks, setQuickLinks } = useWorkspace();
@@ -86,7 +86,8 @@ export default function QuickLinksPage() {
           {sorted.map((link, i) => (
             <div
               key={link.id}
-              className="group relative rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3 transition-colors hover:border-[var(--accent)]"
+              className={clsx("group relative rounded-xl border p-3 transition-colors", HOVER_DARKEN_CLASS)}
+              style={cardTintStyle(link.color)}
             >
               <button
                 draggable

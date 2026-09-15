@@ -14,7 +14,7 @@ export function StatCard({ label, value, icon: Icon, href, family }: StatCardPro
   const colors = CATEGORY_COLORS[family];
 
   const content = (
-    <div className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-colors hover:border-[var(--accent)]">
+    <div className={`flex items-center justify-between rounded-xl border p-4 transition-colors ${colors.card}`}>
       <div>
         <p className="text-xs font-medium text-[var(--muted)]">{label}</p>
         <p className="mt-1 text-2xl font-semibold text-[var(--foreground)]">{value}</p>

@@ -8,7 +8,7 @@ import type { Space } from "@/types";
 import { useWorkspace } from "@/lib/client/workspace-context";
 import { api } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
-import { getReadableTextColor } from "@/lib/client/color-utils";
+import { getReadableTextColor, cardTintStyle, HOVER_DARKEN_CLASS } from "@/lib/client/color-utils";
 
 interface SpaceCardProps {
   space: Space;
@@ -106,7 +106,10 @@ export function SpaceCard({ space, collectionCount, resourceCount, draggable, on
   }
 
   return (
-    <div className="group relative rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-colors hover:border-[var(--accent)]">
+    <div
+      className={clsx("group relative rounded-xl border p-4 transition-colors", HOVER_DARKEN_CLASS)}
+      style={cardTintStyle(space.color)}
+    >
       {draggable && (
         <button
           draggable

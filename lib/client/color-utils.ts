@@ -15,6 +15,17 @@ export const PASTEL_SWATCHES = [
  * using relative luminance so both legacy vivid colors and new light pastels
  * render with accessible contrast automatically — no per-color lookup table needed.
  */
+/**
+ * A light tint of a user-chosen color, for use as a whole card's background —
+ * paired with the `hover-darken` class below, which uses a CSS brightness
+ * filter so hovering visibly darkens the tint regardless of the underlying hue.
+ */
+export function cardTintStyle(hex: string): { backgroundColor: string; borderColor: string } {
+  return { backgroundColor: `${hex}26`, borderColor: `${hex}55` };
+}
+
+export const HOVER_DARKEN_CLASS = "transition-[filter] hover:brightness-90 dark:hover:brightness-150";
+
 export function getReadableTextColor(hex: string): string {
   const clean = hex.replace("#", "");
   if (clean.length !== 6) return "#ffffff";
