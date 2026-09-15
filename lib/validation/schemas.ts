@@ -10,6 +10,7 @@ const baseRecord = {
 };
 
 export const priorityEnum = z.enum(["low", "normal", "high", "urgent"]);
+export type Priority = z.infer<typeof priorityEnum>;
 export const linkStatusEnum = z.enum([
   "healthy",
   "redirected",

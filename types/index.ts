@@ -10,4 +10,5 @@ export type {
   Workspace,
   Metadata,
   DataFileName,
+  Priority,
 } from "@/lib/validation/schemas";
