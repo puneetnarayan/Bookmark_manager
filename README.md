@@ -59,6 +59,14 @@ conventional database.
   other collections are ever exposed
 - **Global search** (`⌘K`/`Ctrl K`) across spaces, collections, resources, tags,
   Next items, and Quick Links, plus a dedicated `/search` page with filters
+- **Browser extension** (`extension/`, load unpacked in Chrome/Edge): reads your
+  actual open tabs — current tab, selected tabs, or all tabs in the window — and
+  saves them into a Space/Collection, the way Toby's tab capture works. See
+  [`extension/README.md`](extension/README.md).
+- **Optional whole-app access control**: set `APP_ACCESS_TOKEN` to require a
+  token (via a `/login` page or `Authorization: Bearer` header) before anything —
+  pages or API — can be reached. Off by default; the public share links still work
+  even when this is on.
 - **Automatic backups** before destructive/bulk operations, plus manual "Backup Now,"
   backup history, and one-click restore — all from **Settings → Data & Backup**
 - Light/dark/system theme, compact/comfortable density, responsive layout down to
@@ -196,6 +204,22 @@ Backup → Test Connection** to confirm the app can reach your repository.
    workers, no cron jobs — every GitHub read/write happens on-demand inside a
    request.
 
+### 5. (Optional) Lock the app down with an access token
+
+By default the deployed app has no login — anyone with the URL can read and write
+your data. For personal use behind an unlisted URL that's often acceptable, but if
+you want a real gate: set `APP_ACCESS_TOKEN` (any long random string) as an
+environment variable, redeploy, and every page/API call will require it — either
+via a `/login` page (sets a cookie) or an `Authorization: Bearer <token>` header
+(what the browser extension uses). The public `/share/[shareId]` links keep working
+unauthenticated either way, since that's the intended public-sharing feature.
+
+### 6. (Optional) Install the browser extension
+
+See [`extension/README.md`](extension/README.md) — load it unpacked in Chrome or
+Edge, point it at your deployed URL (and access token, if you set one), and it can
+save your actual open tabs directly into a Space/Collection.
+
 ## Backup & Recovery
 
 Go to **Settings → Data & Backup**:
@@ -230,6 +254,11 @@ Go to **Settings → Data & Backup**:
 
 ## Security Notes
 
+- **By default this app has no login.** Anyone with the deployed URL can read and
+  write your data — acceptable for a personal, unlisted deployment, but set
+  `APP_ACCESS_TOKEN` (see Setup step 5) if you want a real gate. Middleware
+  (`middleware.ts`) enforces it on every page and API route except the public
+  `/share/[shareId]` view, which is meant to be reachable without credentials.
 - `GITHUB_TOKEN` (and the other `GITHUB_DATA_*` variables) are read only inside
   server-side route handlers (`app/api/**`) and the `lib/github`, `lib/data`,
   `lib/backup` modules, all of which import the `server-only` package — importing

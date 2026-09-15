@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Save to Workspace</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; width: 300px; margin: 0; padding: 14px; color: #0f172a; }
+    h1 { font-size: 14px; margin: 0 0 10px; }
+    fieldset { border: none; padding: 0; margin: 0 0 12px; }
+    label.radio { display: flex; align-items: center; gap: 6px; font-size: 13px; margin-bottom: 6px; }
+    label.field { display: block; font-size: 12px; font-weight: 600; margin-top: 10px; margin-bottom: 4px; }
+    select, input { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 13px; }
+    button { margin-top: 14px; width: 100%; padding: 8px; border: none; border-radius: 6px; background: #6366f1; color: white; font-size: 13px; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #status { margin-top: 10px; font-size: 12px; }
+    #status.success { color: #059669; }
+    #status.error { color: #dc2626; }
+    #unconfigured { font-size: 13px; }
+    #unconfigured a { color: #6366f1; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="unconfigured" hidden>
+    <p>Connect this extension to your workspace app first.</p>
+    <a href="#" id="openOptions">Open settings</a>
+  </div>
+
+  <div id="main" hidden>
+    <h1>Save to Workspace</h1>
+
+    <fieldset>
+      <label class="radio"><input type="radio" name="scope" value="current" checked /> Current tab</label>
+      <label class="radio"><input type="radio" name="scope" value="selected" /> Selected tabs</label>
+      <label class="radio"><input type="radio" name="scope" value="all" /> All tabs in this window</label>
+    </fieldset>
+    <p id="tabCount" style="font-size:12px;color:#64748b;margin:-6px 0 0;"></p>
+
+    <label class="field" for="space">Space</label>
+    <select id="space"></select>
+
+    <label class="field" for="collection">Collection</label>
+    <select id="collection"></select>
+    <input id="newCollectionName" type="text" placeholder="New collection name" hidden />
+
+    <button id="save">Save</button>
+    <p id="status"></p>
+  </div>
+
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

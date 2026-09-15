@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Workspace — Save Tabs settings</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; max-width: 420px; margin: 32px auto; color: #0f172a; }
+    h1 { font-size: 16px; margin-bottom: 4px; }
+    p.hint { color: #64748b; font-size: 13px; margin-top: 0; }
+    label { display: block; font-size: 13px; font-weight: 600; margin-top: 16px; margin-bottom: 4px; }
+    input { width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; }
+    button { margin-top: 20px; padding: 8px 16px; border: none; border-radius: 6px; background: #6366f1; color: white; font-size: 14px; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    #status { margin-top: 12px; font-size: 13px; }
+    #status.success { color: #059669; }
+    #status.error { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <h1>Workspace — Save Tabs</h1>
+  <p class="hint">Connect this extension to your deployed workspace app.</p>
+
+  <label for="appUrl">Workspace app URL</label>
+  <input id="appUrl" type="text" placeholder="https://your-app.vercel.app" />
+
+  <label for="accessToken">Access token (only if your app has one configured)</label>
+  <input id="accessToken" type="password" placeholder="Leave blank if your app is open" />
+
+  <button id="save">Save & Grant Access</button>
+  <p id="status"></p>
+
+  <script src="shared.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
