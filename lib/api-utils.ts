@@ -10,6 +10,10 @@ export interface ApiErrorBody {
 
 /** Maps known error types to a stable {error, code} JSON body + status, for consistent client handling. */
 export function toErrorResponse(err: unknown): NextResponse<ApiErrorBody> {
+  // Log the real cause server-side (never sent to the client) — never includes GITHUB_TOKEN,
+  // only the error message/stack, which at most echoes GitHub's own response body.
+  console.error("[api-error]", err instanceof Error ? err.stack || err.message : err);
+
   if (err instanceof GitHubConflictError) {
     return NextResponse.json(
       { error: "The data changed on GitHub since you loaded it. Please retry.", code: "conflict" },
