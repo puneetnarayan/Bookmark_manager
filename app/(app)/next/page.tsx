@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ListChecks, Plus, Archive } from "lucide-react";
 import { useWorkspace } from "@/lib/client/workspace-context";
@@ -30,6 +30,14 @@ function isToday(iso: string): boolean {
 }
 
 export default function NextPage() {
+  return (
+    <Suspense fallback={<Skeleton className="h-40" />}>
+      <NextPageInner />
+    </Suspense>
+  );
+}
+
+function NextPageInner() {
   const { loading, tasks, setTasks } = useWorkspace();
   const { addToast } = useToast();
   const searchParams = useSearchParams();

@@ -18,7 +18,7 @@ export function parseBookmarkHtml(html: string): ParsedBookmark[] {
   let pendingFolderName: string | null = null;
 
   while ((match = tokenPattern.exec(html)) !== null) {
-    const [full, tag, h3Text, aAttrs, aText] = match;
+    const [full, , h3Text, aAttrs, aText] = match;
 
     if (/^<DL/i.test(full)) {
       if (pendingFolderName !== null) {

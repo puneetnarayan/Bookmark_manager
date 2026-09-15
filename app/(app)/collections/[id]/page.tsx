@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useMemo, useState } from "react";
+import { Suspense, use, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Library, Plus, Share2, Copy, Check } from "lucide-react";
@@ -16,6 +16,14 @@ import { api, ApiError } from "@/lib/client/api";
 import { useToast } from "@/lib/client/toast-context";
 
 export default function CollectionDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  return (
+    <Suspense fallback={<Skeleton className="h-40" />}>
+      <CollectionDetailPageInner params={params} />
+    </Suspense>
+  );
+}
+
+function CollectionDetailPageInner({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const router = useRouter();
   const searchParams = useSearchParams();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Library, Plus } from "lucide-react";
 import { useWorkspace } from "@/lib/client/workspace-context";
@@ -10,6 +10,14 @@ import { Button } from "@/components/ui/Button";
 import { Skeleton } from "@/components/ui/Skeleton";
 
 export default function AllResourcesPage() {
+  return (
+    <Suspense fallback={<Skeleton className="h-40" />}>
+      <AllResourcesPageInner />
+    </Suspense>
+  );
+}
+
+function AllResourcesPageInner() {
   const { loading, resources, spaces, collections, tags } = useWorkspace();
   const { openAddResource } = useQuickActions();
   const searchParams = useSearchParams();

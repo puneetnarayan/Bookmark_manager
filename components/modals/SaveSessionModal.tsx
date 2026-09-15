@@ -10,7 +10,7 @@ import { useToast } from "@/lib/client/toast-context";
 
 export function SaveSessionModal() {
   const { saveSessionOpen, closeSaveSession } = useQuickActions();
-  const { spaces, collections, setCollections, setResources, settings } = useWorkspace();
+  const { spaces, collections, setResources, settings } = useWorkspace();
   const { addToast } = useToast();
   const activeSpaces = useMemo(() => spaces.filter((s) => !s.deletedAt && !s.archived), [spaces]);
 

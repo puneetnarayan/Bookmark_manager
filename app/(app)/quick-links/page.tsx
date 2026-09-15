@@ -155,7 +155,6 @@ function QuickLinkModal({
   editing: QuickLink | null;
   onSaved: (link: QuickLink, isNew: boolean) => void;
 }) {
-  const { addToast } = useToast();
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [color, setColor] = useState(COLORS[0]);
